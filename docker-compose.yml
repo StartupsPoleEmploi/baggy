@@ -1,0 +1,51 @@
+version: "3"
+services:
+  postal:
+    image: lbb/postal
+    build: ./build
+    command: run
+    ports:
+      - 127.0.0.1:25:25
+    depends_on:
+      - "mysql"
+      - "rabbitmq"
+    volumes:
+      - static_assets:/postal/public
+      - ./data/postal/assets:/postal/public/assets
+      - ./data/postal/config/:/postal/config/local
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?fill .env file}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:?fill .env file}
+      - POSTAL_DOMAIN=${POSTAL_DOMAIN:?fill .env file}
+      - POSTAL_SECRET_KEY=${POSTAL_SECRET_KEY:?fill .env file}
+    restart: unless-stopped
+  mysql:
+    image: mariadb:10
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?fill .env file}
+      - MYSQL_DATABASE=postal
+    restart: unless-stopped
+  rabbitmq:
+    image: rabbitmq:3-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=postal
+      - RABBITMQ_DEFAULT_VHOST=/postal
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:?fill .env file}
+    volumes:
+      - ./data/rabbitmq:/var/lib/rabbitmq
+    restart: unless-stopped
+  nginx:
+    image: nginx
+    ports:
+      - ${NGINX_HTTP_PORT:?fill .env file}:80
+    depends_on:
+      - postal
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - static_assets:/postal/public:ro
+      - ./data/postal/assets:/postal/public/assets:ro
+    restart: unless-stopped
+volumes:
+  static_assets:
