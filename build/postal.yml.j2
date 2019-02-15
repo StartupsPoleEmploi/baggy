@@ -7,7 +7,7 @@ web:
   # The host that the management interface will be available on
   host: email.{{ POSTAL_DOMAIN }}
   # The protocol that requests to the management interface should happen on
-  protocol: https
+  protocol: {{ POSTAL_WEB_PROTOCOL }}
 
 fast_server:
   # This can be enabled to enable click & open tracking on emails. It is disabled by
