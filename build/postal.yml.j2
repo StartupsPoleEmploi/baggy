@@ -46,7 +46,7 @@ dns:
   # https://github.com/atech/postal/wiki/Domains-&-DNS-Configuration for further
   # information about these.
   mx_records:
-    - mx.{{ POSTAL_DOMAIN }}
+    - {{ POSTAL_DOMAIN }}
   smtp_server_hostname: {{ POSTAL_DOMAIN }}
   spf_include: spf.{{ POSTAL_DOMAIN }}
   return_path: rp.{{ POSTAL_DOMAIN }}
