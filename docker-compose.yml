@@ -5,7 +5,7 @@ services:
     build: ./build
     command: run
     ports:
-      - 127.0.0.1:25:25
+      - 127.0.0.1:${SMTP_PORT}:25
     depends_on:
       - "mysql"
       - "rabbitmq"
