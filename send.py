@@ -31,7 +31,7 @@ def main():
     )
     parser.add_argument(
         "-H", "--host",
-        default="localhost",
+        default="http://localhost",
         help="Postal host"
     )
     parser.add_argument(
@@ -41,7 +41,7 @@ def main():
     )
     args = parser.parse_args()
     response = requests.post(
-        "http://{}:{}/api/v1/send/message".format(args.host, args.port),
+        "{}:{}/api/v1/send/message".format(args.host, args.port),
         json={
             "to": args.to,
             "from": args.sender,
