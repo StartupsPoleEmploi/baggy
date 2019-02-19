@@ -1,23 +1,28 @@
 .PHONY: build
 
-build:
+build: ## Build the docker images
 	docker build -t lbb/postal ./build/
 
-init:
+init: ## Initialize the configuration and database
 	docker-compose run --rm postal ./bin/postal initialize-config
 	docker-compose run --rm postal ./bin/postal initialize
 
-user:
+user: ## Create a user for administration
 	docker-compose run --rm postal ./bin/postal make-user
 
-start:
+start: ## Start the services in the foreground
 	docker-compose up
 
-start-daemon:
+start-daemon: ## Start and daemonize services
 	docker-compose up -d
-	@echo "Access the web UI at http://localhost"
 
-stop:
+stop: ## Stop all services
 	docker-compose rm --stop --force
 
-restart: stop start
+restart: stop start ## Restart all services
+
+ESCAPE = 
+help: ## Print this help
+	@grep -E '^([a-zA-Z_-]+:.*?## .*|######* .+)$$' Makefile \
+		| sed 's/######* \(.*\)/\n               $(ESCAPE)[1;31m\1$(ESCAPE)[0m/g' \
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[33m%-30s\033[0m %s\n", $$1, $$2}'
