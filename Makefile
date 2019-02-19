@@ -19,3 +19,5 @@ start-daemon:
 
 stop:
 	docker-compose rm --stop --force
+
+restart: stop start
