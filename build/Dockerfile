@@ -26,6 +26,9 @@ COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 COPY ./postal.yml.j2 /postal/config/postal.yml.j2
 
 EXPOSE 5000
+WORKDIR /postal
 
 ENV POSTAL_CONFIG_ROOT=/postal/config/local
+ENV LOG_TO_STDOUT=1
 ENTRYPOINT ["/bin/bash", "-c", "docker-entrypoint.sh ${*}", "--"]
+CMD ["procodile", "start", "--foreground", "--clean"]

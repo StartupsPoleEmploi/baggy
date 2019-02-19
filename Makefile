@@ -4,11 +4,11 @@ build:
 	docker build -t lbb/postal ./build/
 
 init:
-	docker-compose run --rm postal initialize-config
-	docker-compose run --rm postal initialize
+	docker-compose run --rm postal ./bin/postal initialize-config
+	docker-compose run --rm postal ./bin/postal initialize
 
 user:
-	docker-compose run --rm postal make-user
+	docker-compose run --rm postal ./bin/postal make-user
 
 start:
 	docker-compose up

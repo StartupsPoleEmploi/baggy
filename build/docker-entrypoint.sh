@@ -12,5 +12,5 @@ while ! mysqladmin ping -h mysql --silent; do
     sleep 0.5
 done
 
-## Start Postal
-/postal/bin/postal "$@"
+## Run command
+"$@"
