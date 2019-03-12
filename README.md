@@ -24,7 +24,7 @@ Edit the `.env` file and set appropriate values there.
 Then, run:
 
     make build
-    make initialize
+    make init
     make user
     make start
 
