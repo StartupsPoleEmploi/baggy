@@ -3,9 +3,17 @@
 build: ## Build the docker images
 	docker build -t lbb/postal ./build/
 
+assets: ## Collect base public assets
+	docker run --rm -it --entrypoint=bash --volume=$$(pwd)/data/postal/public:/tmp/public/ lbb/postal -c "cp /postal/public/* /tmp/public/"
+
 init: ## Initialize the configuration and database
 	docker-compose run --rm postal ./bin/postal initialize-config
 	docker-compose run --rm postal ./bin/postal initialize
+	$(MAKE) assets
+
+upgrade: ## Upgrade an existing install
+	docker-compose run --rm postal ./bin/postal upgrade
+	$(MAKE) assets
 
 user: ## Create a user for administration
 	docker-compose run --rm postal ./bin/postal make-user
