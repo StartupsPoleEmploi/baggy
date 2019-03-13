@@ -1,13 +1,11 @@
+web:
+  host: {{ POSTAL_DOMAIN }}
+  protocol: {{ POSTAL_WEB_PROTOCOL }}
+
 web_server:
   bind_address: 0.0.0.0
   port: 5000
   max_threads: 5
-
-web:
-  bind_address: 127.0.0.1
-  port: 5000
-  host: {{ POSTAL_DOMAIN }}
-  protocol: {{ POSTAL_WEB_PROTOCOL }}
 
 fast_server:
   enabled: {{ ENABLE_FAST_SERVER }}
