@@ -20,9 +20,14 @@ def main():
         help="Email subject"
     )
     parser.add_argument(
-        "-b", "--body",
+        "-b", "--plain-body",
         default="",
-        help="Email body"
+        help="Email plain body"
+    )
+    parser.add_argument(
+        "-B", "--html-body",
+        default="",
+        help="Email html body"
     )
     parser.add_argument(
         "-k", "--key",
@@ -46,7 +51,8 @@ def main():
             "to": args.to,
             "from": args.sender,
             "subject": args.subject,
-            "plain_body": args.body,
+            "plain_body": args.plain_body,
+            "html_body": args.html_body,
         },
         headers={
             "X-Server-API-Key": args.key,
