@@ -4,9 +4,9 @@ web_server:
   max_threads: 5
 
 web:
-  # The host that the management interface will be available on
-  host: email.{{ POSTAL_DOMAIN }}
-  # The protocol that requests to the management interface should happen on
+  bind_address: 127.0.0.1
+  port: 5000
+  host: {{ POSTAL_DOMAIN }}
   protocol: {{ POSTAL_WEB_PROTOCOL }}
 
 fast_server:
@@ -45,8 +45,8 @@ dns:
   # https://github.com/atech/postal/wiki/Domains-&-DNS-Configuration for further
   # information about these.
   mx_records:
-    - {{ POSTAL_DOMAIN }}
-  smtp_server_hostname: {{ POSTAL_DOMAIN }}
+    - mx.{{ POSTAL_DOMAIN }}
+  smtp_server_hostname: smtp.{{ POSTAL_DOMAIN }}
   spf_include: spf.{{ POSTAL_DOMAIN }}
   return_path: rp.{{ POSTAL_DOMAIN }}
   route_domain: routes.{{ POSTAL_DOMAIN }}
