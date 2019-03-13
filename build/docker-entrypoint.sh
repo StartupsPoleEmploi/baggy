@@ -1,9 +1,7 @@
 #!/bin/bash
 
 ## Generate config
-if [ ! -f $POSTAL_CONFIG_ROOT/postal.yml ]; then
-	p2 -t /postal/config/postal.yml.j2 -o $POSTAL_CONFIG_ROOT/postal.yml
-fi
+p2 -t /postal/config/postal.yml.j2 -o $POSTAL_CONFIG_ROOT/postal.yml
 cat $POSTAL_CONFIG_ROOT/postal.yml
 
 ## Wait for MySQL to start up
