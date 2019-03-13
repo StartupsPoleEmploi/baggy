@@ -19,7 +19,9 @@ Copy the sample configuration:
 
     cp .env.sample .env
 
-Edit the `.env` file and set appropriate values there.
+Edit the `.env` file and set appropriate values there. To generate random strings, such as the postal secret key or the various passwords, you can run:
+
+    make randomstring
 
 Then, run:
 

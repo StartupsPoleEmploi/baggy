@@ -21,6 +21,9 @@ stop: ## Stop all services
 
 restart: stop start ## Restart all services
 
+randomstring: ## Generate a random 24-character string
+	@cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 24 | head -1
+
 ESCAPE = 
 help: ## Print this help
 	@grep -E '^([a-zA-Z_-]+:.*?## .*|######* .+)$$' Makefile \
