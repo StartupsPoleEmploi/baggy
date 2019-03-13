@@ -8,6 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
 
 RUN apt-get -y update \
 	&& apt-get -y install --no-install-recommends nodejs mysql-client git-core libcap2-bin \
+        # TODO specify postal release explicitely once a release has been created
         && git clone https://github.com/atech/postal.git /postal \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& gem install bundler \

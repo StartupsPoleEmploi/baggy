@@ -17,7 +17,6 @@ services:
       - POSTAL_DOMAIN=${POSTAL_DOMAIN}
       - POSTAL_SECRET_KEY=${POSTAL_SECRET_KEY}
       - POSTAL_WEB_PROTOCOL=${POSTAL_WEB_PROTOCOL}
-      - ENABLE_FAST_SERVER=${ENABLE_FAST_SERVER}
     restart: unless-stopped
   mysql:
     image: mariadb:10
